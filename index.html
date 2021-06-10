@@ -1,124 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<title>Love Calculator</title>
 <style type="text/css">
-h1
+p
 {
+font-size: 20pt;
+color:violet;
 font-family:serif;
-font-size: 25pt;
-color : red;
 }
-input[type=text]
+a
 {
-padding : 2px;
-border : 1px solid black;
+font-size:16pt;
+color:blue;
 }
-button
-{
-background-color:lightgreen;
-font-family:serif;
-font-size:15pt;
-padding:3px solid red;
-border:1px solid black;
-}
-.card
- {
-	border-radius : 2px;
-	width : 20%;
-	background-color:pink;
- }
- .card-body .card-title{
- color :brown;
- font-size:16pt;
- }
- .card-body .card-text{
- font-size :14pt;
- color : green;
- font-weight : 550;
- }
- body
- {
- background-image:url("https://lh3.googleusercontent.com/-SUxPuLT8sV4/TvjCOgfKcyI/AAAAAAAAA0g/40Va6NJERSI/s1600/wedding_card_backgrounds_free.jpg");
- }
-
 </style>
 </head>
-<body>
+<body bgcolor="black">
 <center>
-<h1>Love Calculator</h1>
-<img src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX5660853.jpg" width=7% height=10%>
-
-<form>
-<pre>
-<label style="font-family:arial;font-size:13pt;color:white;">Enter Your Name</label>
-<input type="text" id="fname" name="FirstName" placeholder="">
-
-<label style="font-family:arial;font-size:13pt;color:white;">Enter Your Partner Name</label>
-<input type="text" id="sname" name="PartnerName" placeholder="">
-
-<button type="button" onclick="ajaxCall()">submit</button>
-</pre>
-</form>
-<div id="resultDiv"></div>
+<h1 style="color:white;">Oops!!! Something went wrong??</h1>
+<h2 style="color:white;">Not really!!</h2>
+<h3 style="color:white;font-size:16pt;">Here's a surprise for you!!</h3>
+<p>Want to know how much your partner loves you?</p>
+<div>
+<img src="https://iheartintelligence.com/wp-content/uploads/2018/10/differences-men-women-falling-in-love.jpg" width=60% height=50%>
+</div>
+<a href="https://arati-b.github.io/WebProject.github.io/">Click here</a>
 </center>
-
-<script type="text/javascript">
-
-function ajaxCall()
-{
-
-var inp1=document.getElementById("fname");
-var res1=inp1.value;
-
-var inp2=document.getElementById("sname");
-var res2=inp2.value;
-
-var http = new XMLHttpRequest();
-http.onreadystatechange = function(){
-	if(this.readyState == 4 && this.status == 200)
-	{
-	
-		var data = this.responseText;
-		var obj = JSON.parse(data);
-		
-		var element = document.getElementById("resultDiv");
-		var result = '</br><div class="card" style="width: 18rem;"><div class="card-body"><h2 class="card-title">'+obj.fname+'</h2><h5 class="card-title">'+obj.sname+'</h5><p class="card-text">percentage : '+obj.percentage+'%</p><p class="card-text">result :'+obj.result+'!</p></div></div></br>';
-		
-		element.innerHTML = result;
-		
-		console.log("HTTP status:" +this.status);
-		
-		}
-		
-	if(this.status==404)
-	{
-	var element = document.getElementById("resultDiv");
-	
-	var data = this.responseText;
-	var obj = JSON.parse(data);
-	element.innerHTML = obj.message;
-	console.log("Request is not successful "+this.status);
-	console.log(data);
-	}
-	
- };
-	
-http.open("GET",`https://love-calculator.p.rapidapi.com/getPercentage?fname=${res1}&sname=${res2}`,true);
-
-
-http.setRequestHeader("x-rapidapi-key", "5402999afdmsh92125acdcc25b15p1af181jsn89eab9a9ed55");
-http.setRequestHeader("x-rapidapi-host", "love-calculator.p.rapidapi.com");
-
-
-http.send();
-}
-
-</script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 </body>
 </html>
+
