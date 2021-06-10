@@ -1,108 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Weather Report</title>
+<title></title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style type="text/css">
-body
+h1
 {
-background-image:url("https://static.vecteezy.com/system/resources/previews/001/019/303/original/paper-art-rain-clouds-vector.jpg");
-width :100%;
-height :500px;
-background-size :cover;
-background-repeat : no-repeat;
-background-position :relative;
-position:relative;
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
+font-family:serif;
+font-size: 25pt;
+color : red;
 }
-.header
+input[type=text]
 {
-  padding: 4px;
-  text-align: center;
-  color: white;
-  font-size: 30px;
-  color:blue;
+padding : 2px;
+border : 1px solid black;
 }
 button
 {
- background-color : blue;
- color : white;
- padding: 3px;
+background-color:lightgreen;
+font-family:serif;
+font-size:15pt;
+padding:3px solid red;
+border:1px solid black;
 }
 .card
-{
- background-image:url("https://live.staticflickr.com/4553/39007444552_12913fa573_k.jpg");
- border-radius : 5px;
-}
-.card .card-img-top
-{
- color :violet;
-}
-.card-body .card-title
-{
- color : white;
-}
-.card-body .card-text
-{
+ {
+	border-radius : 2px;
+	width : 20%;
+	background-color:pink;
+ }
+ .card-body .card-title{
+ color :brown;
+ font-size:16pt;
+ }
+ .card-body .card-text{
  font-size :14pt;
- color : white;
+ color : green;
  font-weight : 550;
-}
+ }
+ body
+ {
+ background-image:url("https://lh3.googleusercontent.com/-SUxPuLT8sV4/TvjCOgfKcyI/AAAAAAAAA0g/40Va6NJERSI/s1600/wedding_card_backgrounds_free.jpg");
+ }
+
 </style>
 </head>
 <body>
-<div class="header">
-  <h1>Weather Report
-  <image id="img" src="https://clipartart.com/images/clipart-rainy-day-4.jpg" width=5% height=5%>
-  </h1>
-  </div>
 <center>
-<div id="btn">
+<h1>Love Calculator</h1>
+<img src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX5660853.jpg" width=7% height=10%>
+
 <form>
-<b><input type="text" id="txtCity" name="cityname" placeholder="Enter Location">
-<button type="button" id="btnGetWeather" onclick="ajaxCall()" >search</button></b></center>
+<pre>
+<label style="font-family:arial;font-size:13pt;color:white;">Enter Your Name</label>
+<input type="text" id="fname" name="FirstName" placeholder="">
+
+<label style="font-family:arial;font-size:13pt;color:white;">Enter Your Partner Name</label>
+<input type="text" id="sname" name="PartnerName" placeholder="">
+
+<button type="button" onclick="ajaxCall()">submit</button>
+</pre>
 </form>
-</div>
-<center><div id="resultDiv"></div></center>
+<div id="resultDiv"></div>
+</center>
 
 <script type="text/javascript">
 
-function ajaxCall(){
+function ajaxCall()
+{
 
-var inp = document.getElementById("txtCity");
-var res = inp.value;
+var inp1=document.getElementById("fname");
+var res1=inp1.value;
+
+var inp2=document.getElementById("sname");
+var res2=inp2.value;
 
 var http = new XMLHttpRequest();
 http.onreadystatechange = function(){
 	if(this.readyState == 4 && this.status == 200)
-	{	
+	{
+	
 		var data = this.responseText;
 		var obj = JSON.parse(data);
 		
 		var element = document.getElementById("resultDiv");
-		var result = '</br><div class="card" style="width: 18rem;"><h2 class="card-img-top">'+obj.name+'</h2><div class="card-body"><h5 class="card-title">Temperature :'+obj.main.temp+'K</h5><p class="card-text">Pressure : '+obj.main.pressure+'atms</p><p class="card-text">Humidity :'+obj.main.humidity+'%</p><p class="card-text">Wind speed :'+obj.wind.speed+'m/s</p><p class="card-text">'+obj.weather[0].description+'</p></div></div></br>';
+		var result = '</br><div class="card" style="width: 18rem;"><div class="card-body"><h2 class="card-title">'+obj.fname+'</h2><h5 class="card-title">'+obj.sname+'</h5><p class="card-text">percentage : '+obj.percentage+'%</p><p class="card-text">result :'+obj.result+'!</p></div></div></br>';
+		
 		element.innerHTML = result;
 		
 		console.log("HTTP status:" +this.status);
+		
 		}
-	else if(this.status==404)
+		
+	if(this.status==404)
 	{
 	var element = document.getElementById("resultDiv");
 	
 	var data = this.responseText;
 	var obj = JSON.parse(data);
 	element.innerHTML = obj.message;
-	element.style.color = "red";
-	element.style.fontSize = "18pt";
-	element.style.align = "center";
 	console.log("Request is not successful "+this.status);
 	console.log(data);
 	}
-	};
 	
-http.open("GET",`https://api.openweathermap.org/data/2.5/weather?q=${res}&appid=84a266df0df77a0bcec68e49c7868070`,true);
+ };
+	
+http.open("GET",`https://love-calculator.p.rapidapi.com/getPercentage?fname=${res1}&sname=${res2}`,true);
+
+
+http.setRequestHeader("x-rapidapi-key", "5402999afdmsh92125acdcc25b15p1af181jsn89eab9a9ed55");
+http.setRequestHeader("x-rapidapi-host", "love-calculator.p.rapidapi.com");
+
+
 http.send();
 }
 
